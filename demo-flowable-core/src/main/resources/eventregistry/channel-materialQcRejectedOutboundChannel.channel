@@ -1,0 +1,8 @@
+{
+    "key": "materialQcRejectedOutboundChannel",
+    "name": "Material QC Rejected Outbound Channel",
+    "channelType": "outbound",
+    "type": "kafka",
+    "serializerType": "json",
+    "topic": "notification-channel"
+}

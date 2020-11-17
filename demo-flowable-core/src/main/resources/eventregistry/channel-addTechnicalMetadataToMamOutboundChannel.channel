@@ -1,0 +1,8 @@
+{
+    "key": "addTechnicalMetadataToMamOutboundChannel",
+    "name": "Add technical metadata to MAM Outbound Channel",
+    "channelType": "outbound",
+    "type": "kafka",
+    "serializerType": "json",
+    "topic": "mam-channel"
+}

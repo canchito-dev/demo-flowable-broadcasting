@@ -1,0 +1,8 @@
+{
+    "key": "generateLowResolutionFileOutboundChannel",
+    "name": "Generate low-resolution file Outbound Channel",
+    "channelType": "outbound",
+    "type": "kafka",
+    "serializerType": "json",
+    "topic": "transcoding-channel"
+}

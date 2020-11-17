@@ -1,0 +1,8 @@
+{
+    "key": "uploadLowResolutionFileToMamOutboundChannel",
+    "name": "Upload low-resolution file to MAM Outbound Channel",
+    "channelType": "outbound",
+    "type": "kafka",
+    "serializerType": "json",
+    "topic": "storage-channel"
+}

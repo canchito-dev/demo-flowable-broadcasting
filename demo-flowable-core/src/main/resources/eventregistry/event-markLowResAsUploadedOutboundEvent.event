@@ -1,0 +1,19 @@
+{
+    "key": "markLowResAsUploadedOutboundEvent",
+    "name": "Mark low-res as uploaded Outbound Event",
+    "inboundChannelKeys": [],
+    "outboundChannelKeys": [
+        "markLowResAsUploadedOutboundChannel"
+    ],
+    "correlationParameters": [],
+    "payload": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        }
+    ]
+}

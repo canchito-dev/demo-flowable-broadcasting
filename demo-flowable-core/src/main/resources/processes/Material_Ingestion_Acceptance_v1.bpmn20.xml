@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
+  <process id="materialIngestionAcceptance" name="Material Ingestion Acceptance" isExecutable="true">
+    <documentation>Manages the material that was acquired and it quality control acceptance criteria were passed</documentation>
+    <startEvent id="startEvent1" flowable:formKey="dummyStartForm" flowable:formFieldValidation="true"></startEvent>
+    <serviceTask id="add-metadata-to-content-library" name="Add descriptive metadata to content library" flowable:type="send-event" flowable:triggerable="true">
+      <extensionElements>
+        <flowable:eventType><![CDATA[addDescriptiveMetadataToLibraryOutboundEvent]]></flowable:eventType>
+        <flowable:triggerEventType><![CDATA[descriptiveMetadataAddedToLibraryInboundEvent]]></flowable:triggerEventType>
+        <flowable:eventInParameter sourceExpression="${operationId}" target="operationId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventInParameter sourceExpression="${execution.getId()}" target="executionId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Add descriptive metadata to content library Outbound Event]]></flowable:eventName>
+        <flowable:channelKey xmlns:flowable="http://flowable.org/bpmn"><![CDATA[addDescriptiveMetadataToLibraryOutboundChannel]]></flowable:channelKey>
+        <flowable:channelName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Add descriptive metadata to content library Outbound Channel]]></flowable:channelName>
+        <flowable:channelType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[kafka]]></flowable:channelType>
+        <flowable:channelDestination xmlns:flowable="http://flowable.org/bpmn"><![CDATA[library-channel]]></flowable:channelDestination>
+        <flowable:triggerEventName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Descriptive metadata added to content library Inbound Event]]></flowable:triggerEventName>
+        <flowable:triggerChannelKey xmlns:flowable="http://flowable.org/bpmn"><![CDATA[descriptiveMetadataAddedToLibraryInboundChannel]]></flowable:triggerChannelKey>
+        <flowable:triggerChannelName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Descriptive metadata added to content library Inbound Channel]]></flowable:triggerChannelName>
+        <flowable:triggerChannelType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[kafka]]></flowable:triggerChannelType>
+        <flowable:triggerChannelDestination xmlns:flowable="http://flowable.org/bpmn"><![CDATA[flowable-channel]]></flowable:triggerChannelDestination>
+        <flowable:triggerEventCorrelationParameter xmlns:flowable="http://flowable.org/bpmn" name="operationId" type="string" value="${operationId}"></flowable:triggerEventCorrelationParameter>
+        <flowable:triggerEventCorrelationParameter xmlns:flowable="http://flowable.org/bpmn" name="executionId" type="string" value="${execution.getId()}"></flowable:triggerEventCorrelationParameter>
+        <flowable:keyDetectionType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[fixedValue]]></flowable:keyDetectionType>
+        <flowable:keyDetectionValue xmlns:flowable="http://flowable.org/bpmn"><![CDATA[descriptiveMetadataAddedToLibraryInboundEvent]]></flowable:keyDetectionValue>
+      </extensionElements>
+    </serviceTask>
+    <serviceTask id="generate-low-resolution" name="Generate low-resolution file" flowable:type="send-event" flowable:triggerable="true">
+      <extensionElements>
+        <flowable:eventType><![CDATA[generateLowResolutionFileOutboundEvent]]></flowable:eventType>
+        <flowable:triggerEventType><![CDATA[lowResolutionFileGeneratedInboundEvent]]></flowable:triggerEventType>
+        <flowable:eventInParameter sourceExpression="${operationId}" target="operationId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventInParameter sourceExpression="${execution.getId()}" target="executionId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Generate low-resolution file Outbound Event]]></flowable:eventName>
+        <flowable:channelKey xmlns:flowable="http://flowable.org/bpmn"><![CDATA[generateLowResolutionFileOutboundChannel]]></flowable:channelKey>
+        <flowable:channelName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Generate low-resolution file Outbound Channel]]></flowable:channelName>
+        <flowable:channelType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[kafka]]></flowable:channelType>
+        <flowable:channelDestination xmlns:flowable="http://flowable.org/bpmn"><![CDATA[transcoding-channel]]></flowable:channelDestination>
+        <flowable:triggerEventName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Low-resolution file generated Inbound Event]]></flowable:triggerEventName>
+        <flowable:triggerChannelKey xmlns:flowable="http://flowable.org/bpmn"><![CDATA[lowResolutionFileGeneratedInboundChannel]]></flowable:triggerChannelKey>
+        <flowable:triggerChannelName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Low-resolution file generated Inbound Channel]]></flowable:triggerChannelName>
+        <flowable:triggerChannelType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[kafka]]></flowable:triggerChannelType>
+        <flowable:triggerChannelDestination xmlns:flowable="http://flowable.org/bpmn"><![CDATA[flowable-channel]]></flowable:triggerChannelDestination>
+        <flowable:triggerEventCorrelationParameter xmlns:flowable="http://flowable.org/bpmn" name="operationId" type="string" value="${operationId}"></flowable:triggerEventCorrelationParameter>
+        <flowable:triggerEventCorrelationParameter xmlns:flowable="http://flowable.org/bpmn" name="executionId" type="integer" value="${execution.getId()}"></flowable:triggerEventCorrelationParameter>
+        <flowable:keyDetectionType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[fixedValue]]></flowable:keyDetectionType>
+        <flowable:keyDetectionValue xmlns:flowable="http://flowable.org/bpmn"><![CDATA[lowResolutionFileGeneratedInboundEvent]]></flowable:keyDetectionValue>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-88E2A3CC-10C0-4EF7-9564-ADA20BD54117" sourceRef="generate-low-resolution" targetRef="sid-BB954F1F-C302-4382-97CA-3498349745E6"></sequenceFlow>
+    <parallelGateway id="sid-BB954F1F-C302-4382-97CA-3498349745E6"></parallelGateway>
+    <serviceTask id="upload-high-resolution-file-to-mam" name="Upload high-resolution file to MAM" flowable:type="send-event" flowable:triggerable="true">
+      <extensionElements>
+        <flowable:eventType><![CDATA[uploadHighResolutionFileToMamOutboundEvent]]></flowable:eventType>
+        <flowable:triggerEventType><![CDATA[highResolutionFileUploadedToMamInboundEvent]]></flowable:triggerEventType>
+        <flowable:eventInParameter sourceExpression="${operationId}" target="operationId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventInParameter sourceExpression="${execution.getId()}" target="executionId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Upload high-resolution file to MAM Outbound Event]]></flowable:eventName>
+        <flowable:channelKey xmlns:flowable="http://flowable.org/bpmn"><![CDATA[uploadHighResolutionFileToMamOutboundChannel]]></flowable:channelKey>
+        <flowable:channelName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Upload high-resolution file to MAM Outbound Channel]]></flowable:channelName>
+        <flowable:channelType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[kafka]]></flowable:channelType>
+        <flowable:channelDestination xmlns:flowable="http://flowable.org/bpmn"><![CDATA[storage-channel]]></flowable:channelDestination>
+        <flowable:triggerEventName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[High-resolution file uploaded to MAM Inbound Event]]></flowable:triggerEventName>
+        <flowable:triggerChannelKey xmlns:flowable="http://flowable.org/bpmn"><![CDATA[highResolutionFileUploadedToMamInboundChannel]]></flowable:triggerChannelKey>
+        <flowable:triggerChannelName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[High-resolution file uploaded to MAM Inbound Channel]]></flowable:triggerChannelName>
+        <flowable:triggerChannelType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[kafka]]></flowable:triggerChannelType>
+        <flowable:triggerChannelDestination xmlns:flowable="http://flowable.org/bpmn"><![CDATA[flowable-channel]]></flowable:triggerChannelDestination>
+        <flowable:triggerEventCorrelationParameter xmlns:flowable="http://flowable.org/bpmn" name="operationId" type="string" value="${operationId}"></flowable:triggerEventCorrelationParameter>
+        <flowable:triggerEventCorrelationParameter xmlns:flowable="http://flowable.org/bpmn" name="executionId" type="string" value="${execution.getId()}"></flowable:triggerEventCorrelationParameter>
+        <flowable:keyDetectionType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[fixedValue]]></flowable:keyDetectionType>
+        <flowable:keyDetectionValue xmlns:flowable="http://flowable.org/bpmn"><![CDATA[highResolutionFileUploadedToMamInboundEvent]]></flowable:keyDetectionValue>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-DE6AC3F1-C0C3-4783-AABC-B363B896D7D3" sourceRef="sid-BB954F1F-C302-4382-97CA-3498349745E6" targetRef="upload-low-resolution-file-to-mam"></sequenceFlow>
+    <sequenceFlow id="sid-4FD64279-E2D6-4486-9239-A7097048AE42" sourceRef="sid-BB954F1F-C302-4382-97CA-3498349745E6" targetRef="upload-high-resolution-file-to-mam"></sequenceFlow>
+    <serviceTask id="upload-low-resolution-file-to-mam" name="Upload low-resolution file to MAM" flowable:type="send-event" flowable:triggerable="true">
+      <extensionElements>
+        <flowable:eventType><![CDATA[uploadLowResolutionFileToMamOutboundEvent]]></flowable:eventType>
+        <flowable:triggerEventType><![CDATA[lowResolutionFileUploadedToMamInboundEvent]]></flowable:triggerEventType>
+        <flowable:eventInParameter sourceExpression="${operationId}" target="operationId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventInParameter sourceExpression="${execution.getId()}" target="executionId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Upload low-resolution file to MAM Outbound Event]]></flowable:eventName>
+        <flowable:channelKey xmlns:flowable="http://flowable.org/bpmn"><![CDATA[uploadLowResolutionFileToMamOutboundChannel]]></flowable:channelKey>
+        <flowable:channelName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Upload low-resolution file to MAM Outbound Channel]]></flowable:channelName>
+        <flowable:channelType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[kafka]]></flowable:channelType>
+        <flowable:channelDestination xmlns:flowable="http://flowable.org/bpmn"><![CDATA[storage-channel]]></flowable:channelDestination>
+        <flowable:triggerEventName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Low-resolution file uploaded to MAM Inbound Event]]></flowable:triggerEventName>
+        <flowable:triggerChannelKey xmlns:flowable="http://flowable.org/bpmn"><![CDATA[lowResolutionFileUploadedToMamInboundChannel]]></flowable:triggerChannelKey>
+        <flowable:triggerChannelName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Low-resolution file uploaded to MAM Inbound Channel]]></flowable:triggerChannelName>
+        <flowable:triggerChannelDestination xmlns:flowable="http://flowable.org/bpmn"><![CDATA[flowable-channel]]></flowable:triggerChannelDestination>
+        <flowable:triggerEventCorrelationParameter xmlns:flowable="http://flowable.org/bpmn" name="operationId" type="string" value="${operationId}"></flowable:triggerEventCorrelationParameter>
+        <flowable:triggerEventCorrelationParameter xmlns:flowable="http://flowable.org/bpmn" name="executionId" type="string" value="${execution.getId()}"></flowable:triggerEventCorrelationParameter>
+        <flowable:keyDetectionType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[fixedValue]]></flowable:keyDetectionType>
+        <flowable:keyDetectionValue xmlns:flowable="http://flowable.org/bpmn"><![CDATA[lowResolutionFileUploadedToMamInboundEvent]]></flowable:keyDetectionValue>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-0A611849-4736-464F-A671-A022BCB37593" sourceRef="upload-high-resolution-file-to-mam" targetRef="mark-high-res-as-uploaded"></sequenceFlow>
+    <serviceTask id="mark-high-res-as-uploaded" name="Mark high-res as uploaded" flowable:type="send-event">
+      <extensionElements>
+        <flowable:eventType><![CDATA[markHighResAsUploadedOutboundEvent]]></flowable:eventType>
+        <flowable:eventInParameter sourceExpression="${operationId}" target="operationId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventInParameter sourceExpression="${execution.getId()}" target="executionId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Mark high-res as uploaded Outbound Event]]></flowable:eventName>
+        <flowable:channelKey xmlns:flowable="http://flowable.org/bpmn"><![CDATA[markHighResAsUploadedOutboundChannel]]></flowable:channelKey>
+        <flowable:channelName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Mark high-res as uploaded Outbound Channel]]></flowable:channelName>
+        <flowable:channelType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[kafka]]></flowable:channelType>
+        <flowable:channelDestination xmlns:flowable="http://flowable.org/bpmn"><![CDATA[mam-channel]]></flowable:channelDestination>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-7BCB7E84-2863-4BB5-A04E-F81179616D28" sourceRef="upload-low-resolution-file-to-mam" targetRef="mark-low-res-as-uploaded"></sequenceFlow>
+    <serviceTask id="mark-low-res-as-uploaded" name="Mark low-res as uploaded" flowable:type="send-event">
+      <extensionElements>
+        <flowable:eventType><![CDATA[markLowResAsUploadedOutboundEvent]]></flowable:eventType>
+        <flowable:eventInParameter sourceExpression="${operationId}" target="operationId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventInParameter sourceExpression="${execution.getId()}" target="executionId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Mark low-res as uploaded Outbound Event]]></flowable:eventName>
+        <flowable:channelKey xmlns:flowable="http://flowable.org/bpmn"><![CDATA[markLowResAsUploadedOutboundChannel]]></flowable:channelKey>
+        <flowable:channelName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Mark low-res as uploaded Outbound Channel]]></flowable:channelName>
+        <flowable:channelType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[kafka]]></flowable:channelType>
+        <flowable:channelDestination xmlns:flowable="http://flowable.org/bpmn"><![CDATA[mam-channel]]></flowable:channelDestination>
+      </extensionElements>
+    </serviceTask>
+    <parallelGateway id="sid-8B2BF189-BA89-47AF-AFD0-B0D2D4CC8475"></parallelGateway>
+    <sequenceFlow id="sid-4516C9E1-AB29-4398-9668-7E6B3529B705" sourceRef="startEvent1" targetRef="sid-ACC1A4CF-C87B-4168-BE1A-0C8C5BF4B3DC"></sequenceFlow>
+    <sequenceFlow id="sid-36838179-C088-4F81-B188-06FAAED24140" sourceRef="sid-ACC1A4CF-C87B-4168-BE1A-0C8C5BF4B3DC" targetRef="add-metadata-to-mam"></sequenceFlow>
+    <sequenceFlow id="sid-68E54125-D0D7-4353-A100-29F857826823" sourceRef="sid-ACC1A4CF-C87B-4168-BE1A-0C8C5BF4B3DC" targetRef="add-metadata-to-content-library"></sequenceFlow>
+    <sequenceFlow id="sid-6E10058C-C449-4FC5-B5E3-7A4D244674E1" sourceRef="sid-ACC1A4CF-C87B-4168-BE1A-0C8C5BF4B3DC" targetRef="generate-low-resolution"></sequenceFlow>
+    <serviceTask id="add-metadata-to-mam" name="Add technical metadata to MAM" flowable:type="send-event" flowable:triggerable="true">
+      <extensionElements>
+        <flowable:eventType><![CDATA[addTechnicalMetadataToMamOutboundEvent]]></flowable:eventType>
+        <flowable:triggerEventType><![CDATA[technicalMetadataAddedToMamInboundEvent]]></flowable:triggerEventType>
+        <flowable:eventInParameter sourceExpression="${operationId}" target="operationId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventInParameter sourceExpression="${execution.getId()}" target="executionId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Add technical metadata to MAM Outbound Event]]></flowable:eventName>
+        <flowable:channelKey xmlns:flowable="http://flowable.org/bpmn"><![CDATA[addTechnicalMetadataToMamOutboundChannel]]></flowable:channelKey>
+        <flowable:channelName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Add technical metadata to MAM Outbound Event]]></flowable:channelName>
+        <flowable:channelType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[kafka]]></flowable:channelType>
+        <flowable:channelDestination xmlns:flowable="http://flowable.org/bpmn"><![CDATA[mam-channel]]></flowable:channelDestination>
+        <flowable:triggerEventName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Technical metadata added to MAM Inbound Event]]></flowable:triggerEventName>
+        <flowable:triggerChannelKey xmlns:flowable="http://flowable.org/bpmn"><![CDATA[technicalMetadataAddedToMamInboundChannel]]></flowable:triggerChannelKey>
+        <flowable:triggerChannelName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Technical metadata added to MAM Inbound Channel]]></flowable:triggerChannelName>
+        <flowable:triggerChannelType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[kafka]]></flowable:triggerChannelType>
+        <flowable:triggerChannelDestination xmlns:flowable="http://flowable.org/bpmn"><![CDATA[mam-channel]]></flowable:triggerChannelDestination>
+        <flowable:triggerEventCorrelationParameter xmlns:flowable="http://flowable.org/bpmn" name="operationId" type="string" value="${operationId}"></flowable:triggerEventCorrelationParameter>
+        <flowable:triggerEventCorrelationParameter xmlns:flowable="http://flowable.org/bpmn" name="executionId" type="string" value="${execution.getId()}"></flowable:triggerEventCorrelationParameter>
+        <flowable:keyDetectionType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[fixedValue]]></flowable:keyDetectionType>
+        <flowable:keyDetectionValue xmlns:flowable="http://flowable.org/bpmn"><![CDATA[technicalMetadataAddedToMamInboundEvent]]></flowable:keyDetectionValue>
+      </extensionElements>
+    </serviceTask>
+    <parallelGateway id="sid-ACC1A4CF-C87B-4168-BE1A-0C8C5BF4B3DC"></parallelGateway>
+    <sequenceFlow id="sid-F20CD64B-2904-4ABD-9164-735AD9C956BF" sourceRef="sid-8B2BF189-BA89-47AF-AFD0-B0D2D4CC8475" targetRef="sid-7236DB7C-4641-431D-B241-463010CAE1A4"></sequenceFlow>
+    <endEvent id="sid-7236DB7C-4641-431D-B241-463010CAE1A4">
+      <terminateEventDefinition></terminateEventDefinition>
+    </endEvent>
+    <sequenceFlow id="sid-EA18188D-BD5A-4593-BBD8-D30073F99869" sourceRef="add-metadata-to-mam" targetRef="sid-8B2BF189-BA89-47AF-AFD0-B0D2D4CC8475"></sequenceFlow>
+    <sequenceFlow id="sid-9AFD9173-F7EA-4AFC-A1C6-6AC8B5F60439" sourceRef="add-metadata-to-content-library" targetRef="sid-8B2BF189-BA89-47AF-AFD0-B0D2D4CC8475"></sequenceFlow>
+    <parallelGateway id="sid-1C45165E-5304-40CE-A970-64205372C477"></parallelGateway>
+    <sequenceFlow id="sid-9E239236-E916-458D-8C0B-31425C8C060E" sourceRef="mark-high-res-as-uploaded" targetRef="sid-1C45165E-5304-40CE-A970-64205372C477"></sequenceFlow>
+    <sequenceFlow id="sid-4C1167B1-CF2F-495F-8D32-FB44B746DC10" sourceRef="mark-low-res-as-uploaded" targetRef="sid-1C45165E-5304-40CE-A970-64205372C477"></sequenceFlow>
+    <sequenceFlow id="sid-99159A99-DD1D-4AF3-ABE7-B559C9E90CE0" sourceRef="sid-1C45165E-5304-40CE-A970-64205372C477" targetRef="sid-8B2BF189-BA89-47AF-AFD0-B0D2D4CC8475"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_materialIngestionAcceptance">
+    <bpmndi:BPMNPlane bpmnElement="materialIngestionAcceptance" id="BPMNPlane_materialIngestionAcceptance">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="15.0" y="92.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="add-metadata-to-content-library" id="BPMNShape_add-metadata-to-content-library">
+        <omgdc:Bounds height="80.0" width="100.0" x="180.0" y="16.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="generate-low-resolution" id="BPMNShape_generate-low-resolution">
+        <omgdc:Bounds height="80.0" width="100.0" x="180.0" y="262.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-BB954F1F-C302-4382-97CA-3498349745E6" id="BPMNShape_sid-BB954F1F-C302-4382-97CA-3498349745E6">
+        <omgdc:Bounds height="40.0" width="40.0" x="325.0" y="282.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="upload-high-resolution-file-to-mam" id="BPMNShape_upload-high-resolution-file-to-mam">
+        <omgdc:Bounds height="80.0" width="100.0" x="410.0" y="211.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="upload-low-resolution-file-to-mam" id="BPMNShape_upload-low-resolution-file-to-mam">
+        <omgdc:Bounds height="80.0" width="100.0" x="410.0" y="313.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="mark-high-res-as-uploaded" id="BPMNShape_mark-high-res-as-uploaded">
+        <omgdc:Bounds height="80.0" width="100.0" x="555.0" y="211.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="mark-low-res-as-uploaded" id="BPMNShape_mark-low-res-as-uploaded">
+        <omgdc:Bounds height="80.0" width="100.0" x="555.0" y="313.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-8B2BF189-BA89-47AF-AFD0-B0D2D4CC8475" id="BPMNShape_sid-8B2BF189-BA89-47AF-AFD0-B0D2D4CC8475">
+        <omgdc:Bounds height="40.0" width="40.0" x="780.0" y="87.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="add-metadata-to-mam" id="BPMNShape_add-metadata-to-mam">
+        <omgdc:Bounds height="80.0" width="100.0" x="180.0" y="118.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-ACC1A4CF-C87B-4168-BE1A-0C8C5BF4B3DC" id="BPMNShape_sid-ACC1A4CF-C87B-4168-BE1A-0C8C5BF4B3DC">
+        <omgdc:Bounds height="40.0" width="40.0" x="90.0" y="87.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-7236DB7C-4641-431D-B241-463010CAE1A4" id="BPMNShape_sid-7236DB7C-4641-431D-B241-463010CAE1A4">
+        <omgdc:Bounds height="28.0" width="28.0" x="885.0" y="93.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-1C45165E-5304-40CE-A970-64205372C477" id="BPMNShape_sid-1C45165E-5304-40CE-A970-64205372C477">
+        <omgdc:Bounds height="40.0" width="40.0" x="705.0" y="282.5"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-DE6AC3F1-C0C3-4783-AABC-B363B896D7D3" id="BPMNEdge_sid-DE6AC3F1-C0C3-4783-AABC-B363B896D7D3">
+        <omgdi:waypoint x="345.0" y="322.43028656126484"></omgdi:waypoint>
+        <omgdi:waypoint x="345.0" y="353.0"></omgdi:waypoint>
+        <omgdi:waypoint x="410.0" y="353.2826086956522"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-9AFD9173-F7EA-4AFC-A1C6-6AC8B5F60439" id="BPMNEdge_sid-9AFD9173-F7EA-4AFC-A1C6-6AC8B5F60439">
+        <omgdi:waypoint x="279.95000000000005" y="56.456140350877185"></omgdi:waypoint>
+        <omgdi:waypoint x="800.0" y="56.0"></omgdi:waypoint>
+        <omgdi:waypoint x="800.0" y="87.5"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-0A611849-4736-464F-A671-A022BCB37593" id="BPMNEdge_sid-0A611849-4736-464F-A671-A022BCB37593">
+        <omgdi:waypoint x="509.95000000000005" y="251.5"></omgdi:waypoint>
+        <omgdi:waypoint x="554.9999999999807" y="251.5"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-88E2A3CC-10C0-4EF7-9564-ADA20BD54117" id="BPMNEdge_sid-88E2A3CC-10C0-4EF7-9564-ADA20BD54117">
+        <omgdi:waypoint x="279.9499999999468" y="302.5"></omgdi:waypoint>
+        <omgdi:waypoint x="325.0" y="302.5"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-36838179-C088-4F81-B188-06FAAED24140" id="BPMNEdge_sid-36838179-C088-4F81-B188-06FAAED24140">
+        <omgdi:waypoint x="110.0" y="127.43028656126481"></omgdi:waypoint>
+        <omgdi:waypoint x="110.0" y="158.0"></omgdi:waypoint>
+        <omgdi:waypoint x="179.99999999999773" y="158.29166666666666"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-4516C9E1-AB29-4398-9668-7E6B3529B705" id="BPMNEdge_sid-4516C9E1-AB29-4398-9668-7E6B3529B705">
+        <omgdi:waypoint x="44.949997146068426" y="107.5"></omgdi:waypoint>
+        <omgdi:waypoint x="90.0" y="107.5"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-68E54125-D0D7-4353-A100-29F857826823" id="BPMNEdge_sid-68E54125-D0D7-4353-A100-29F857826823">
+        <omgdi:waypoint x="110.0" y="87.5"></omgdi:waypoint>
+        <omgdi:waypoint x="110.0" y="56.0"></omgdi:waypoint>
+        <omgdi:waypoint x="179.99999999999943" y="56.291666666666664"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-4C1167B1-CF2F-495F-8D32-FB44B746DC10" id="BPMNEdge_sid-4C1167B1-CF2F-495F-8D32-FB44B746DC10">
+        <omgdi:waypoint x="654.9499999999882" y="353.29166666666663"></omgdi:waypoint>
+        <omgdi:waypoint x="725.0" y="353.0"></omgdi:waypoint>
+        <omgdi:waypoint x="725.0" y="322.4196924603175"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-9E239236-E916-458D-8C0B-31425C8C060E" id="BPMNEdge_sid-9E239236-E916-458D-8C0B-31425C8C060E">
+        <omgdi:waypoint x="654.9499999999921" y="251.29166666666669"></omgdi:waypoint>
+        <omgdi:waypoint x="725.0" y="251.0"></omgdi:waypoint>
+        <omgdi:waypoint x="725.0" y="282.5"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-99159A99-DD1D-4AF3-ABE7-B559C9E90CE0" id="BPMNEdge_sid-99159A99-DD1D-4AF3-ABE7-B559C9E90CE0">
+        <omgdi:waypoint x="744.8048611111018" y="302.632119205298"></omgdi:waypoint>
+        <omgdi:waypoint x="800.0" y="303.0"></omgdi:waypoint>
+        <omgdi:waypoint x="800.0" y="127.40507932446266"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-7BCB7E84-2863-4BB5-A04E-F81179616D28" id="BPMNEdge_sid-7BCB7E84-2863-4BB5-A04E-F81179616D28">
+        <omgdi:waypoint x="509.94999999990824" y="353.5"></omgdi:waypoint>
+        <omgdi:waypoint x="554.9999999999807" y="353.5"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-6E10058C-C449-4FC5-B5E3-7A4D244674E1" id="BPMNEdge_sid-6E10058C-C449-4FC5-B5E3-7A4D244674E1">
+        <omgdi:waypoint x="110.0" y="127.44487410071942"></omgdi:waypoint>
+        <omgdi:waypoint x="110.0" y="302.0"></omgdi:waypoint>
+        <omgdi:waypoint x="180.0" y="302.2916666666667"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-4FD64279-E2D6-4486-9239-A7097048AE42" id="BPMNEdge_sid-4FD64279-E2D6-4486-9239-A7097048AE42">
+        <omgdi:waypoint x="345.0" y="282.5"></omgdi:waypoint>
+        <omgdi:waypoint x="345.0" y="251.0"></omgdi:waypoint>
+        <omgdi:waypoint x="410.0" y="251.2826086956522"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-EA18188D-BD5A-4593-BBD8-D30073F99869" id="BPMNEdge_sid-EA18188D-BD5A-4593-BBD8-D30073F99869">
+        <omgdi:waypoint x="279.9499999999757" y="158.4561403508772"></omgdi:waypoint>
+        <omgdi:waypoint x="800.0" y="158.0"></omgdi:waypoint>
+        <omgdi:waypoint x="800.0" y="127.41969246031746"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-F20CD64B-2904-4ABD-9164-735AD9C956BF" id="BPMNEdge_sid-F20CD64B-2904-4ABD-9164-735AD9C956BF">
+        <omgdi:waypoint x="819.9399344096871" y="107.5"></omgdi:waypoint>
+        <omgdi:waypoint x="885.0" y="107.5"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

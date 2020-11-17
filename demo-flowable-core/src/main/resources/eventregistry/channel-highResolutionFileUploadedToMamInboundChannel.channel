@@ -1,0 +1,13 @@
+{
+    "key": "highResolutionFileUploadedToMamInboundChannel",
+    "name": "High-resolution file uploaded to MAM Inbound Channel",
+    "channelType": "inbound",
+    "type": "kafka",
+    "deserializerType": "json",
+    "channelEventKeyDetection": {
+        "fixedValue": "highResolutionFileUploadedToMamInboundEvent"
+    },
+    "topics": [
+        "flowable-channel"
+    ]
+}

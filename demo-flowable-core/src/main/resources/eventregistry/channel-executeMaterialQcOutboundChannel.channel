@@ -1,0 +1,8 @@
+{
+    "key": "executeMaterialQcOutboundChannel",
+    "name": "Execute Material QC Outbound Channel",
+    "channelType": "outbound",
+    "type": "kafka",
+    "serializerType": "json",
+    "topic": "qc-channel"
+}

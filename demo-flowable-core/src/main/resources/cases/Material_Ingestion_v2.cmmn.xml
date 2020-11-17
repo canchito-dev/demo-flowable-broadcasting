@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flowable="http://flowable.org/cmmn" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" targetNamespace="http://www.flowable.org/casedef">
+  <case id="materialIngestionV2" name="Material Ingestion v2" flowable:initiatorVariableName="initiator">
+    <casePlanModel id="material-ingestion" name="Material Ingestion" flowable:formKey="materialIngestionStartForm" flowable:formFieldValidation="true">
+      <planItem id="planItem3" name="Quality Control Stage" definitionRef="qc-stage"></planItem>
+      <planItem id="planItem5" name="QC Passed" definitionRef="qc-passed-stage">
+        <entryCriterion id="qc-passed-entry-sentry-from-editing" sentryRef="sentry3"></entryCriterion>
+        <entryCriterion id="qc-passed-entry-sentry" sentryRef="sentry2"></entryCriterion>
+      </planItem>
+      <planItem id="planItem7" name="QC Not Passed" definitionRef="qc-not-passed-stage">
+        <entryCriterion id="qc-not-passed-entry-sentry" sentryRef="sentry4"></entryCriterion>
+      </planItem>
+      <planItem id="planItem9" name="Need Editing" definitionRef="need-editing-stage">
+        <entryCriterion id="need-editing-entry-sentry" sentryRef="sentry5"></entryCriterion>
+      </planItem>
+      <sentry id="sentry3">
+        <planItemOnPart id="sentryOnPart2" sourceRef="planItem9">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+      </sentry>
+      <sentry id="sentry2">
+        <planItemOnPart id="sentryOnPart3" sourceRef="planItem3">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+        <ifPart>
+          <condition><![CDATA[${var:eq(qcPassed, 'Yes') && var:eq(needEditing, 'No')}]]></condition>
+        </ifPart>
+      </sentry>
+      <sentry id="sentry4">
+        <planItemOnPart id="sentryOnPart4" sourceRef="planItem3">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+        <ifPart>
+          <condition><![CDATA[${var:eq(qcPassed, 'No') && var:eq(needEditing, 'No')}]]></condition>
+        </ifPart>
+      </sentry>
+      <sentry id="sentry5">
+        <planItemOnPart id="sentryOnPart5" sourceRef="planItem3">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+        <ifPart>
+          <condition><![CDATA[${var:eq(qcPassed, 'No') && var:eq(needEditing, 'Yes')}]]></condition>
+        </ifPart>
+      </sentry>
+      <sentry id="sentry6">
+        <planItemOnPart id="sentryOnPart6" sourceRef="planItem5">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+        <planItemOnPart id="sentryOnPart7" sourceRef="planItem7">
+          <standardEvent>complete</standardEvent>
+        </planItemOnPart>
+      </sentry>
+      <stage id="qc-stage" name="Quality Control Stage">
+        <planItem id="planItem1" name="Gather metadata and QC data" definitionRef="gather-metadata-and-qc-data"></planItem>
+        <planItem id="planItem2" name="QC passed?" definitionRef="qc-passed">
+          <entryCriterion id="qc-human-task-entry-sentry" sentryRef="sentry1"></entryCriterion>
+        </planItem>
+        <sentry id="sentry1">
+          <planItemOnPart id="sentryOnPart1" sourceRef="planItem1">
+            <standardEvent>complete</standardEvent>
+          </planItemOnPart>
+        </sentry>
+        <processTask id="gather-metadata-and-qc-data" name="Gather metadata and QC data" flowable:fallbackToDefaultTenant="false">
+          <extensionElements>
+            <flowable:in sourceExpression="${operationId}" target="operationId"></flowable:in>
+            <flowable:in sourceExpression="${caseInstance.id}" target="caseInstanceId"></flowable:in>
+          </extensionElements>
+          <processRefExpression><![CDATA[automaticMtdAndQCExecution]]></processRefExpression>
+        </processTask>
+        <humanTask id="qc-passed" name="QC passed?" flowable:formKey="qcPassedForm" flowable:formFieldValidation="true"></humanTask>
+      </stage>
+      <stage id="qc-passed-stage" name="QC Passed">
+        <planItem id="planItem4" name="Material accepted workflow" definitionRef="material-accepted-workflow"></planItem>
+        <processTask id="material-accepted-workflow" name="Material accepted workflow" flowable:fallbackToDefaultTenant="false">
+          <extensionElements>
+            <flowable:in sourceExpression="${operationId}" target="operationId"></flowable:in>
+          </extensionElements>
+          <processRefExpression><![CDATA[materialIngestionAcceptance]]></processRefExpression>
+        </processTask>
+      </stage>
+      <stage id="qc-not-passed-stage" name="QC Not Passed">
+        <planItem id="planItem6" name="Material rejected workflow" definitionRef="material-rejected-workflow"></planItem>
+        <processTask id="material-rejected-workflow" name="Material rejected workflow" flowable:fallbackToDefaultTenant="false">
+          <extensionElements>
+            <flowable:in sourceExpression="${operationId}" target="operationId"></flowable:in>
+          </extensionElements>
+          <processRefExpression><![CDATA[materialIngestionRejection]]></processRefExpression>
+        </processTask>
+      </stage>
+      <stage id="need-editing-stage" name="Need Editing">
+        <planItem id="planItem8" name="Edit material" definitionRef="edit-material"></planItem>
+        <humanTask id="edit-material" name="Edit material" flowable:formFieldValidation="true"></humanTask>
+      </stage>
+      <exitCriterion id="case-exit-sentry" sentryRef="sentry6"></exitCriterion>
+    </casePlanModel>
+  </case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="CMMNDiagram_materialIngestionV2">
+      <cmmndi:CMMNShape id="CMMNShape_material-ingestion" cmmnElementRef="material-ingestion">
+        <dc:Bounds height="540.0" width="580.0" x="120.0" y="30.0"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_case-exit-sentry" cmmnElementRef="case-exit-sentry">
+        <dc:Bounds height="22.0" width="14.0" x="209.0" y="560.0"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItem3" cmmnElementRef="planItem3">
+        <dc:Bounds height="126.0" width="277.0" x="260.82035873950457" y="48.5"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItem1" cmmnElementRef="planItem1">
+        <dc:Bounds height="80.0" width="100.0" x="275.82035873950457" y="81.0"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItem2" cmmnElementRef="planItem2">
+        <dc:Bounds height="80.0" width="100.0" x="431.5" y="81.0"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_qc-human-task-entry-sentry" cmmnElementRef="qc-human-task-entry-sentry">
+        <dc:Bounds height="22.0" width="14.0" x="423.5" y="110.0"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItem5" cmmnElementRef="planItem5">
+        <dc:Bounds height="128.0" width="161.0" x="318.82035873950457" y="423.5"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_qc-passed-entry-sentry-from-editing" cmmnElementRef="qc-passed-entry-sentry-from-editing">
+        <dc:Bounds height="22.0" width="14.0" x="451.82035873950457" y="412.5"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_qc-passed-entry-sentry" cmmnElementRef="qc-passed-entry-sentry">
+        <dc:Bounds height="22.0" width="14.0" x="399.82035873950457" y="411.5"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItem4" cmmnElementRef="planItem4">
+        <dc:Bounds height="80.0" width="100.0" x="350.32035873950457" y="447.5"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItem7" cmmnElementRef="planItem7">
+        <dc:Bounds height="132.0" width="160.0" x="180.0" y="238.5"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_qc-not-passed-entry-sentry" cmmnElementRef="qc-not-passed-entry-sentry">
+        <dc:Bounds height="22.0" width="14.0" x="295.0" y="227.5"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItem6" cmmnElementRef="planItem6">
+        <dc:Bounds height="80.0" width="100.0" x="210.0" y="264.5"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItem9" cmmnElementRef="planItem9">
+        <dc:Bounds height="121.00000000000006" width="168.0" x="455.8203587395046" y="244.0"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_need-editing-entry-sentry" cmmnElementRef="need-editing-entry-sentry">
+        <dc:Bounds height="22.0" width="14.0" x="573.8203587395046" y="232.0"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItem8" cmmnElementRef="planItem8">
+        <dc:Bounds height="80.0" width="100.0" x="489.8203587395046" y="270.0"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNEdge id="CMMNEdge_sid-C67F6978-65E8-4FCC-8D17-755211AC3D25" cmmnElementRef="planItem3" targetCMMNElementRef="need-editing-entry-sentry">
+        <di:waypoint x="482.84694558861133" y="174.45"></di:waypoint>
+        <di:waypoint x="573.8203587395046" y="243.0"></di:waypoint>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="CMMNEdge_sid-C8995119-24C2-4364-8382-203335843CD6" cmmnElementRef="planItem3" targetCMMNElementRef="qc-passed-entry-sentry">
+        <di:waypoint x="400.8941087395046" y="174.45"></di:waypoint>
+        <di:waypoint x="406.82035873950457" y="411.5"></di:waypoint>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="CMMNEdge_sid-ABD8E76C-9E50-4D74-B7BB-B4865FDCD3EA" cmmnElementRef="planItem9" targetCMMNElementRef="qc-passed-entry-sentry-from-editing">
+        <di:waypoint x="502.19851000000875" y="364.95000000000005"></di:waypoint>
+        <di:waypoint x="465.82035873950457" y="423.5"></di:waypoint>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="CMMNEdge_sid-B65582A4-EB2D-4652-888D-460CE6B83356" cmmnElementRef="planItem1" targetCMMNElementRef="qc-human-task-entry-sentry">
+        <di:waypoint x="375.7703587394882" y="121.0"></di:waypoint>
+        <di:waypoint x="423.5" y="121.0"></di:waypoint>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="CMMNEdge_sid-4AA69E0B-6FE0-41A1-84C2-DF4960621B04" cmmnElementRef="planItem7" targetCMMNElementRef="case-exit-sentry">
+        <di:waypoint x="247.36960600375235" y="370.45000000000005"></di:waypoint>
+        <di:waypoint x="209.0" y="570.866228742148"></di:waypoint>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="CMMNEdge_sid-174DFDF8-D587-4C46-A720-4EF5065C4539" cmmnElementRef="planItem3" targetCMMNElementRef="qc-not-passed-entry-sentry">
+        <di:waypoint x="347.57088944352984" y="174.45"></di:waypoint>
+        <di:waypoint x="295.0" y="228.89638103096098"></di:waypoint>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+      <cmmndi:CMMNEdge id="CMMNEdge_sid-60AE492B-64B5-427A-A462-C4B018A196B0" cmmnElementRef="planItem5" targetCMMNElementRef="case-exit-sentry">
+        <di:waypoint x="318.8203587395045" y="522.796145112854"></di:waypoint>
+        <di:waypoint x="209.0" y="566.1983252358289"></di:waypoint>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNEdge>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</definitions>

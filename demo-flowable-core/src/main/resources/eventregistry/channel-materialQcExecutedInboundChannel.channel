@@ -1,0 +1,13 @@
+{
+    "key": "materialQcExecutedInboundChannel",
+    "name": "Material QC Executed Inbound Channel",
+    "channelType": "inbound",
+    "type": "kafka",
+    "deserializerType": "json",
+    "channelEventKeyDetection": {
+        "fixedValue": "materialQcExecutedInboundEvent"
+    },
+    "topics": [
+        "flowable-channel"
+    ]
+}

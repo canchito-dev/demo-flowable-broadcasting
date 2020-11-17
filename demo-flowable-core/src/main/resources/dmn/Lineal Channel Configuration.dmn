@@ -1,0 +1,58 @@
+<definitions xmlns="http://www.omg.org/spec/DMN/20180521/MODEL/" id="definition_d77ff763-f8dd-11ea-ad46-0242ac120007" name="Lineal Channel Configuration" namespace="http://www.flowable.org/dmn">
+  <decision id="linealChannelConfiguration" name="Lineal Channel Configuration">
+    <description>Contains de configuration for a channel</description>
+    <decisionTable id="decisionTable_d77ff763-f8dd-11ea-ad46-0242ac120007" hitPolicy="FIRST">
+      <input label="Channel Name">
+        <inputExpression id="inputExpression_3" typeRef="string">
+          <text>channelName</text>
+        </inputExpression>
+        <inputValues>
+          <text>"multiLanguage","singleLanguage"</text>
+        </inputValues>
+      </input>
+      <output id="outputExpression_2" label="Audio Configuration" name="audioConfiguration" typeRef="string">
+        <outputValues>
+          <text>"SPA,ENG","SPA"</text>
+        </outputValues>
+      </output>
+      <output id="outputExpression_5" label="Subtitle Configuration" name="subtitleConfiguration" typeRef="string">
+        <outputValues>
+          <text>"SPA","none"</text>
+        </outputValues>
+      </output>
+      <output id="outputExpression_6" label="Delivery Configuration" name="deliveryConfiguration" typeRef="string">
+        <outputValues>
+          <text>"aspera_provider_a","signiant_provider_a","ftp_provider_a","smb_provider_a","aspera_provider_b","signiant_provider_b","ftp_provider_b","smb_provider_b"</text>
+        </outputValues>
+      </output>
+      <rule>
+        <inputEntry id="inputEntry_3_1">
+          <text><![CDATA[== "singleLanguage"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_1">
+          <text><![CDATA["SPA"]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_5_1">
+          <text><![CDATA["none"]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_6_1">
+          <text><![CDATA["signiant_provider_a"]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_2">
+          <text><![CDATA[== "multiLanguage"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_2">
+          <text><![CDATA["SPA,ENG"]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_5_2">
+          <text><![CDATA["SPA"]]></text>
+        </outputEntry>
+        <outputEntry id="outputEntry_6_2">
+          <text><![CDATA["aspera_provider_b"]]></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

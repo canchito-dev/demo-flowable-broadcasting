@@ -1,0 +1,8 @@
+{
+    "key": "markLowResAsUploadedOutboundChannel",
+    "name": "Mark low-res as uploaded Outbound Channel",
+    "channelType": "outbound",
+    "type": "kafka",
+    "serializerType": "json",
+    "topic": "mam-channel"
+}

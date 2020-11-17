@@ -1,0 +1,13 @@
+{
+    "key": "descriptiveMetadataAddedToLibraryInboundChannel",
+    "name": "Descriptive metadata added to content library Inbound Channel",
+    "channelType": "inbound",
+    "type": "kafka",
+    "deserializerType": "json",
+    "channelEventKeyDetection": {
+        "fixedValue": "descriptiveMetadataAddedToLibraryInboundEvent"
+    },
+    "topics": [
+        "flowable-channel"
+    ]
+}

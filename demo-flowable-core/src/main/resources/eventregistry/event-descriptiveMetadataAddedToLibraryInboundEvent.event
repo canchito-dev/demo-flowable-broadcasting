@@ -1,0 +1,19 @@
+{
+    "key": "descriptiveMetadataAddedToLibraryInboundEvent",
+    "name": "Descriptive metadata added to content library Inbound Event",
+    "inboundChannelKeys": [
+        "descriptiveMetadataAddedToLibraryInboundChannel"
+    ],
+    "outboundChannelKeys": [],
+    "correlationParameters": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        }
+    ],
+    "payload": []
+}

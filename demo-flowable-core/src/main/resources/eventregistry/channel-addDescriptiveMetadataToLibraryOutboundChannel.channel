@@ -1,0 +1,8 @@
+{
+    "key": "addDescriptiveMetadataToLibraryOutboundChannel",
+    "name": "Add descriptive metadata to content library Outbound Channel",
+    "channelType": "outbound",
+    "type": "kafka",
+    "serializerType": "json",
+    "topic": "library-channel"
+}

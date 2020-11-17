@@ -1,0 +1,13 @@
+{
+    "key": "materialMetadataGatheredInboundChannel",
+    "name": "Material Metadata Gathered Inbound Channel",
+    "channelType": "inbound",
+    "type": "kafka",
+    "deserializerType": "json",
+    "channelEventKeyDetection": {
+        "fixedValue": "materialMetadataGatheredInboundEvent"
+    },
+    "topics": [
+        "flowable-channel"
+    ]
+}

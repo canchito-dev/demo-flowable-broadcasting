@@ -1,0 +1,22 @@
+{
+   "name":"Dummy Start Form",
+   "key":"dummyStartForm",
+   "version":0,
+   "fields":[
+      {
+         "fieldType":"FormField",
+         "id":"operationId",
+         "name":"Operation Id:",
+         "type":"text",
+         "value":null,
+         "required":true,
+         "readOnly":false,
+         "overrideId":true,
+         "placeholder":null,
+         "layout":null
+      }
+   ],
+   "outcomes":[
+
+   ]
+}

@@ -1,0 +1,19 @@
+{
+    "key": "materialQcExecutedInboundEvent",
+    "name": "Material QC Executed Inbound Event",
+    "inboundChannelKeys": [
+        "materialQcExecutedInboundChannel"
+    ],
+    "outboundChannelKeys": [],
+    "correlationParameters": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        }
+    ],
+    "payload": []
+}

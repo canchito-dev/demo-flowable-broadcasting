@@ -1,0 +1,19 @@
+{
+    "key": "gatherMaterialMetadataOutboundEvent",
+    "name": "Gather Material Metadata Outbound Event",
+    "inboundChannelKeys": [],
+    "outboundChannelKeys": [
+        "gatherMaterialMetadataOutboundChannel"
+    ],
+    "correlationParameters": [],
+    "payload": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        }
+    ]
+}

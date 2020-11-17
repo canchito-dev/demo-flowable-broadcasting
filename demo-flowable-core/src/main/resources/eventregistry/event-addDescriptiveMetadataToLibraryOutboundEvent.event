@@ -1,0 +1,19 @@
+{
+    "key": "addDescriptiveMetadataToLibraryOutboundEvent",
+    "name": "Add descriptive metadata to content library Outbound Event",
+    "inboundChannelKeys": [],
+    "outboundChannelKeys": [
+        "addDescriptiveMetadataToLibraryOutboundChannel"
+    ],
+    "correlationParameters": [],
+    "payload": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        }
+    ]
+}

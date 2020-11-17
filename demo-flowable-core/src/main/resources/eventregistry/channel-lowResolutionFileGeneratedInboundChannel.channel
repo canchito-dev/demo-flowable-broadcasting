@@ -1,0 +1,13 @@
+{
+    "key": "lowResolutionFileGeneratedInboundChannel",
+    "name": "Low-resolution file generated Inbound Channel",
+    "channelType": "inbound",
+    "type": "kafka",
+    "deserializerType": "json",
+    "channelEventKeyDetection": {
+        "fixedValue": "lowResolutionFileGeneratedInboundEvent"
+    },
+    "topics": [
+        "flowable-channel"
+    ]
+}

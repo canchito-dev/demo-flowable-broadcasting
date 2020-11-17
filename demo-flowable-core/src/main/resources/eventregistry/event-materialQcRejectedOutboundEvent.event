@@ -1,0 +1,19 @@
+{
+    "key": "materialQcRejectedOutboundEvent",
+    "name": "Material QC Rejected Outbound Event",
+    "inboundChannelKeys": [],
+    "outboundChannelKeys": [
+        "materialQcRejectedOutboundChannel"
+    ],
+    "correlationParameters": [],
+    "payload": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        }
+    ]
+}

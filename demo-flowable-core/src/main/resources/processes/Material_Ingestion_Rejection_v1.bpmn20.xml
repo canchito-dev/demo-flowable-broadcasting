@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
+  <process id="materialIngestionRejection" name="Material Ingestion Rejection" isExecutable="true">
+    <documentation>Manages the material that was acquired but rejected because it did not passed the quality control process</documentation>
+    <startEvent id="startEvent1" flowable:formKey="dummyStartForm" flowable:formFieldValidation="true"></startEvent>
+    <sequenceFlow id="sid-FD92BABE-F3C4-4018-AC87-E44F683DB231" sourceRef="startEvent1" targetRef="notify-material-rejection"></sequenceFlow>
+    <serviceTask id="notify-material-rejection" name="Notify material rejection" flowable:type="send-event">
+      <extensionElements>
+        <flowable:eventType><![CDATA[materialQcRejectedOutboundEvent]]></flowable:eventType>
+        <flowable:eventInParameter sourceExpression="${operationId}" target="operationId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventInParameter sourceExpression="${execution.getId()}" target="executionId" targetType="string"></flowable:eventInParameter>
+        <flowable:eventName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Material QC Rejected Outbound Event]]></flowable:eventName>
+        <flowable:channelKey xmlns:flowable="http://flowable.org/bpmn"><![CDATA[materialQcRejectedOutboundChannel]]></flowable:channelKey>
+        <flowable:channelName xmlns:flowable="http://flowable.org/bpmn"><![CDATA[Material QC Rejected Outbound Channel]]></flowable:channelName>
+        <flowable:channelType xmlns:flowable="http://flowable.org/bpmn"><![CDATA[kafka]]></flowable:channelType>
+        <flowable:channelDestination xmlns:flowable="http://flowable.org/bpmn"><![CDATA[notification-channel]]></flowable:channelDestination>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sid-8911824D-A605-417F-A016-A12492C759CD" sourceRef="notify-material-rejection" targetRef="sid-C7DC5B31-84E6-4B38-A182-83629642BC5D"></sequenceFlow>
+    <endEvent id="sid-C7DC5B31-84E6-4B38-A182-83629642BC5D">
+      <terminateEventDefinition></terminateEventDefinition>
+    </endEvent>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_materialIngestionRejection">
+    <bpmndi:BPMNPlane bpmnElement="materialIngestionRejection" id="BPMNPlane_materialIngestionRejection">
+      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="30.0" y="45.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="notify-material-rejection" id="BPMNShape_notify-material-rejection">
+        <omgdc:Bounds height="80.0" width="100.0" x="105.0" y="20.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-C7DC5B31-84E6-4B38-A182-83629642BC5D" id="BPMNShape_sid-C7DC5B31-84E6-4B38-A182-83629642BC5D">
+        <omgdc:Bounds height="28.0" width="28.0" x="250.0" y="46.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-FD92BABE-F3C4-4018-AC87-E44F683DB231" id="BPMNEdge_sid-FD92BABE-F3C4-4018-AC87-E44F683DB231">
+        <omgdi:waypoint x="59.9499984899576" y="60.0"></omgdi:waypoint>
+        <omgdi:waypoint x="105.0" y="60.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-8911824D-A605-417F-A016-A12492C759CD" id="BPMNEdge_sid-8911824D-A605-417F-A016-A12492C759CD">
+        <omgdi:waypoint x="204.95" y="60.0"></omgdi:waypoint>
+        <omgdi:waypoint x="250.0" y="60.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

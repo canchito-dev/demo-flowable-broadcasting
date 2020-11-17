@@ -1,0 +1,19 @@
+{
+    "key": "addTechnicalMetadataToMamOutboundEvent",
+    "name": "Add technical metadata to MAM Outbound Event",
+    "inboundChannelKeys": [],
+    "outboundChannelKeys": [
+        "addTechnicalMetadataToMamOutboundChannel"
+    ],
+    "correlationParameters": [],
+    "payload": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        }
+    ]
+}

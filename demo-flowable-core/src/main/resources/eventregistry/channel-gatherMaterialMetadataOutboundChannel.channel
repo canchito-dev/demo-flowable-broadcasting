@@ -1,0 +1,8 @@
+{
+    "key": "gatherMaterialMetadataOutboundChannel",
+    "name": "Gather Material Metadata Outbound Channel",
+    "channelType": "outbound",
+    "type": "kafka",
+    "serializerType": "json",
+    "topic": "metadata-channel"
+}

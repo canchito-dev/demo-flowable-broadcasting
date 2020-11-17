@@ -1,0 +1,19 @@
+{
+    "key": "uploadHighResolutionFileToMamOutboundEvent",
+    "name": "Upload high-resolution file to MAM Outbound Event",
+    "inboundChannelKeys": [],
+    "outboundChannelKeys": [
+        "uploadHighResolutionFileToMamOutboundChannel"
+    ],
+    "correlationParameters": [],
+    "payload": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        }
+    ]
+}

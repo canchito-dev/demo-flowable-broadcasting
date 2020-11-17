@@ -1,0 +1,19 @@
+{
+    "key": "generateLowResolutionFileOutboundEvent",
+    "name": "Generate low-resolution file Outbound Event",
+    "inboundChannelKeys": [],
+    "outboundChannelKeys": [
+        "generateLowResolutionFileOutboundChannel"
+    ],
+    "correlationParameters": [],
+    "payload": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        }
+    ]
+}
