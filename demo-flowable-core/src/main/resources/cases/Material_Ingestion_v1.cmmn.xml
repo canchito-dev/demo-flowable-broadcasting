@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flowable="http://flowable.org/cmmn" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:di="http://www.omg.org/spec/CMMN/20151109/DI" targetNamespace="http://www.flowable.org/casedef">
-  <case id="materialIngestionV2" name="Material Ingestion v2" flowable:initiatorVariableName="initiator">
-    <casePlanModel id="material-ingestion" name="Material Ingestion" flowable:formKey="materialIngestionStartForm" flowable:formFieldValidation="true">
+  <case id="materialIngestion" name="Material Ingestion" flowable:initiatorVariableName="initiator">
+    <casePlanModel id="material-ingestion" name="Material Ingestion" flowable:formKey="materialIngestionStartForm" flowable:formFieldValidation="true" autoComplete="true">
       <planItem id="planItem3" name="Quality Control Stage" definitionRef="qc-stage"></planItem>
       <planItem id="planItem5" name="QC Passed" definitionRef="qc-passed-stage">
         <entryCriterion id="qc-passed-entry-sentry-from-editing" sentryRef="sentry3"></entryCriterion>
@@ -69,7 +69,7 @@
         </processTask>
         <humanTask id="qc-passed" name="QC passed?" flowable:formKey="qcPassedForm" flowable:formFieldValidation="true"></humanTask>
       </stage>
-      <stage id="qc-passed-stage" name="QC Passed">
+      <stage id="qc-passed-stage" name="QC Passed" autoComplete="true">
         <planItem id="planItem4" name="Material accepted workflow" definitionRef="material-accepted-workflow"></planItem>
         <processTask id="material-accepted-workflow" name="Material accepted workflow" flowable:fallbackToDefaultTenant="false">
           <extensionElements>
@@ -78,7 +78,7 @@
           <processRefExpression><![CDATA[materialIngestionAcceptance]]></processRefExpression>
         </processTask>
       </stage>
-      <stage id="qc-not-passed-stage" name="QC Not Passed">
+      <stage id="qc-not-passed-stage" name="QC Not Passed" autoComplete="true">
         <planItem id="planItem6" name="Material rejected workflow" definitionRef="material-rejected-workflow"></planItem>
         <processTask id="material-rejected-workflow" name="Material rejected workflow" flowable:fallbackToDefaultTenant="false">
           <extensionElements>
@@ -87,7 +87,7 @@
           <processRefExpression><![CDATA[materialIngestionRejection]]></processRefExpression>
         </processTask>
       </stage>
-      <stage id="need-editing-stage" name="Need Editing">
+      <stage id="need-editing-stage" name="Need Editing" autoComplete="true">
         <planItem id="planItem8" name="Edit material" definitionRef="edit-material"></planItem>
         <humanTask id="edit-material" name="Edit material" flowable:formFieldValidation="true"></humanTask>
       </stage>
@@ -95,7 +95,7 @@
     </casePlanModel>
   </case>
   <cmmndi:CMMNDI>
-    <cmmndi:CMMNDiagram id="CMMNDiagram_materialIngestionV2">
+    <cmmndi:CMMNDiagram id="CMMNDiagram_materialIngestion">
       <cmmndi:CMMNShape id="CMMNShape_material-ingestion" cmmnElementRef="material-ingestion">
         <dc:Bounds height="540.0" width="580.0" x="120.0" y="30.0"></dc:Bounds>
         <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
