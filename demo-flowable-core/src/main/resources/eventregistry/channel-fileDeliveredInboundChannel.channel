@@ -1,0 +1,13 @@
+{
+    "key": "fileDeliveredInboundChannel",
+    "name": "File Delivered Inbound Channel",
+    "channelType": "inbound",
+    "type": "kafka",
+    "deserializerType": "json",
+    "channelEventKeyDetection": {
+        "fixedValue": "fileDeliveredInboundEvent"
+    },
+    "topics": [
+        "flowable-channel"
+    ]
+}

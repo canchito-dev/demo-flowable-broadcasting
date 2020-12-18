@@ -1,0 +1,13 @@
+{
+    "key": "simpleTranscodeInboundChannel",
+    "name": "Simple Transcode Inbound Channel",
+    "channelType": "inbound",
+    "type": "kafka",
+    "deserializerType": "json",
+    "channelEventKeyDetection": {
+        "fixedValue": "simpleTranscodeInboundEvent"
+    },
+    "topics": [
+        "flowable-channel"
+    ]
+}

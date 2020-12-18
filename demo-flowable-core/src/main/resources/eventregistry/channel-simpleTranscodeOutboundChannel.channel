@@ -1,0 +1,8 @@
+{
+    "key": "simpleTranscodeOutboundChannel",
+    "name": "Simple Transcode Outbound Channel",
+    "channelType": "outbound",
+    "type": "kafka",
+    "serializerType": "json",
+    "topic": "transcoding-channel"
+}

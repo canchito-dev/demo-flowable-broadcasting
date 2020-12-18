@@ -1,0 +1,23 @@
+{
+    "key": "restoreSubtitleFileFromMamOutboundEvent",
+    "name": "Restore Subtitle File From Mam Outbound Event",
+    "inboundChannelKeys": [],
+    "outboundChannelKeys": [
+        "restoreSubtitleFileFromMamOutboundChannel"
+    ],
+    "correlationParameters": [],
+    "payload": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        },
+        {
+            "name": "subtitleConfiguration",
+            "type": "string"
+        }
+    ]
+}

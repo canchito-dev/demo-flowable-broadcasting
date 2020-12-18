@@ -1,0 +1,13 @@
+{
+    "key": "complexTranscodeInboundChannel",
+    "name": "Complex Transcode Inbound Channel",
+    "channelType": "inbound",
+    "type": "kafka",
+    "deserializerType": "json",
+    "channelEventKeyDetection": {
+        "fixedValue": "complexTranscodeInboundEvent"
+    },
+    "topics": [
+        "flowable-channel"
+    ]
+}

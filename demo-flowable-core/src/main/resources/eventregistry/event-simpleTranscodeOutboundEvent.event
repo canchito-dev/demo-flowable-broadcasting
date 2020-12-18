@@ -1,0 +1,31 @@
+{
+    "key": "simpleTranscodeOutboundEvent",
+    "name": "Simple Transcode Outbound Event",
+    "inboundChannelKeys": [],
+    "outboundChannelKeys": [
+        "simpleTranscodeOutboundChannel"
+    ],
+    "correlationParameters": [],
+    "payload": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        },
+        {
+            "name": "materialId",
+            "type": "string"
+        },
+        {
+            "name": "audioConfiguration",
+            "type": "string"
+        },
+        {
+            "name": "subtitleConfiguration",
+            "type": "string"
+        }
+    ]
+}

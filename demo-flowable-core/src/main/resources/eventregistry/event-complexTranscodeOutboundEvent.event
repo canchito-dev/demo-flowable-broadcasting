@@ -1,0 +1,35 @@
+{
+    "key": "complexTranscodeOutboundEvent",
+    "name": "Complex Transcode Outbound Event",
+    "inboundChannelKeys": [],
+    "outboundChannelKeys": [
+        "complexTranscodeOutboundChannel"
+    ],
+    "correlationParameters": [],
+    "payload": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        },
+        {
+            "name": "materialId",
+            "type": "string"
+        },
+        {
+            "name": "audioConfiguration",
+            "type": "string"
+        },
+        {
+            "name": "subtitleConfiguration",
+            "type": "string"
+        },
+        {
+            "name": "transcodingTpl",
+            "type": "string"
+        }
+    ]
+}

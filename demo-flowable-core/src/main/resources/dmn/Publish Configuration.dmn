@@ -1,98 +1,89 @@
-<definitions xmlns="http://www.omg.org/spec/DMN/20180521/MODEL/" id="definition_e7c27857-fc0c-11ea-a860-0242ac120007" name="Publish Configuration" namespace="http://www.flowable.org/dmn">
+<definitions xmlns="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="definition_420c3a32-4118-11eb-ab7b-0242ac1b0005" name="Publish Configuration" namespace="http://www.flowable.org/dmn">
   <decision id="publishConfiguration" name="Publish Configuration">
     <description>Contains de configuration of the audiovisual content that must be published</description>
-    <decisionTable id="decisionTable_e7c27857-fc0c-11ea-a860-0242ac120007" hitPolicy="FIRST">
+    <decisionTable id="decisionTable_06bc2adc-1275-4b50-ba6f-3e307105fc60" hitPolicy="FIRST">
       <input label="Channel Name">
-        <inputExpression id="inputExpression_3" typeRef="string">
+        <inputExpression id="inputExpression_9fcf7968-9489-486a-a140-32bcccbf4958" typeRef="string">
           <text>channelName</text>
         </inputExpression>
         <inputValues>
-          <text>"multiLanguage","singleLanguage","vod"</text>
+          <text>"singleLanguage","multiLanguage","vod"</text>
         </inputValues>
       </input>
-      <output id="outputExpression_2" label="Audio Configuration" name="audioConfiguration" typeRef="string">
-        <outputValues>
-          <text>"SPA,ENG","SPA"</text>
-        </outputValues>
-      </output>
-      <output id="outputExpression_5" label="Subtitle Configuration" name="subtitleConfiguration" typeRef="string">
-        <outputValues>
-          <text>"SPA","none"</text>
-        </outputValues>
-      </output>
-      <output id="outputExpression_6" label="Delivery Configuration" name="deliveryConfiguration" typeRef="string">
-        <outputValues>
-          <text>"aspera_provider_a","signiant_provider_a","ftp_provider_a","smb_provider_a","aspera_provider_b","signiant_provider_b","ftp_provider_b","smb_provider_b"</text>
-        </outputValues>
-      </output>
-      <output id="outputExpression_7" label="Need Transcoding" name="needTranscoding" typeRef="boolean">
+      <output id="outputExpression_dcf1417b-1577-4f05-b3b4-43ebfca4c851" label="Audio Configuration" name="audioConfiguration" typeRef="string"></output>
+      <output id="outputExpression_0a4728f0-4f19-49d8-a072-d271d4fc6a35" label="Subtitle Configuration" name="subtitleConfiguration" typeRef="string"></output>
+      <output id="outputExpression_ecc3a2fd-2a8e-4539-ade5-ce25f9f7d358" label="Delivery Configuration" name="deliveryConfiguration" typeRef="string"></output>
+      <output id="outputExpression_536c6d14-a9d8-415e-ae74-a1bbd401ff68" label="Need Transcoding" name="needTranscoding" typeRef="boolean">
         <outputValues>
           <text>"true","false"</text>
         </outputValues>
       </output>
-      <output id="outputExpression_8" label="Transcoding Template" name="transcodingTpl" typeRef="string">
+      <output id="outputExpression_07a405c0-48be-47c5-88d4-457becc6c59e" label="Transcoding Template" name="transcodingTpl" typeRef="string">
         <outputValues>
-          <text>"singleLanguageTpl","vodTpl"</text>
+          <text>"singleLanguageTpl","vodTpl","none"</text>
         </outputValues>
       </output>
       <rule>
-        <inputEntry id="inputEntry_3_1">
+        <inputEntry id="inputEntry_9fcf7968-9489-486a-a140-32bcccbf4958_1">
           <text><![CDATA[== "singleLanguage"]]></text>
         </inputEntry>
-        <outputEntry id="outputEntry_2_1">
+        <outputEntry id="outputEntry_dcf1417b-1577-4f05-b3b4-43ebfca4c851_1">
           <text><![CDATA["SPA"]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_5_1">
+        <outputEntry id="outputEntry_0a4728f0-4f19-49d8-a072-d271d4fc6a35_1">
           <text><![CDATA["none"]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_6_1">
+        <outputEntry id="outputEntry_ecc3a2fd-2a8e-4539-ade5-ce25f9f7d358_1">
           <text><![CDATA["signiant_provider_a"]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_7_1">
+        <outputEntry id="outputEntry_536c6d14-a9d8-415e-ae74-a1bbd401ff68_1">
           <text><![CDATA[true]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_8_1">
+        <outputEntry id="outputEntry_07a405c0-48be-47c5-88d4-457becc6c59e_1">
           <text><![CDATA["singleLanguageTpl"]]></text>
         </outputEntry>
       </rule>
       <rule>
-        <inputEntry id="inputEntry_3_2">
+        <inputEntry id="inputEntry_9fcf7968-9489-486a-a140-32bcccbf4958_2">
           <text><![CDATA[== "multiLanguage"]]></text>
         </inputEntry>
-        <outputEntry id="outputEntry_2_2">
+        <outputEntry id="outputEntry_dcf1417b-1577-4f05-b3b4-43ebfca4c851_2">
           <text><![CDATA["SPA,ENG"]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_5_2">
+        <outputEntry id="outputEntry_0a4728f0-4f19-49d8-a072-d271d4fc6a35_2">
           <text><![CDATA["SPA"]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_6_2">
+        <outputEntry id="outputEntry_ecc3a2fd-2a8e-4539-ade5-ce25f9f7d358_2">
           <text><![CDATA["aspera_provider_b"]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_7_2">
+        <outputEntry id="outputEntry_536c6d14-a9d8-415e-ae74-a1bbd401ff68_2">
           <text><![CDATA[false]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_8_2"></outputEntry>
+        <outputEntry id="outputEntry_07a405c0-48be-47c5-88d4-457becc6c59e_2">
+          <text><![CDATA["none"]]></text>
+        </outputEntry>
       </rule>
       <rule>
-        <inputEntry id="inputEntry_3_3">
+        <inputEntry id="inputEntry_9fcf7968-9489-486a-a140-32bcccbf4958_3">
           <text><![CDATA[== "vod"]]></text>
         </inputEntry>
-        <outputEntry id="outputEntry_2_3">
+        <outputEntry id="outputEntry_dcf1417b-1577-4f05-b3b4-43ebfca4c851_3">
           <text><![CDATA["SPA,ENG"]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_5_3">
+        <outputEntry id="outputEntry_0a4728f0-4f19-49d8-a072-d271d4fc6a35_3">
           <text><![CDATA["SPA"]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_6_3">
+        <outputEntry id="outputEntry_ecc3a2fd-2a8e-4539-ade5-ce25f9f7d358_3">
           <text><![CDATA["ftp_provider_a"]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_7_3">
+        <outputEntry id="outputEntry_536c6d14-a9d8-415e-ae74-a1bbd401ff68_3">
           <text><![CDATA[true]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_8_3">
+        <outputEntry id="outputEntry_07a405c0-48be-47c5-88d4-457becc6c59e_3">
           <text><![CDATA["vodTpl"]]></text>
         </outputEntry>
       </rule>
     </decisionTable>
   </decision>
+  <dmndi:DMNDI></dmndi:DMNDI>
 </definitions>

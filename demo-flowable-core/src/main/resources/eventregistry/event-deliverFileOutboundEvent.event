@@ -1,0 +1,27 @@
+{
+    "key": "deliverFileOutboundEvent",
+    "name": "Deliver File Outbound Event",
+    "inboundChannelKeys": [],
+    "outboundChannelKeys": [
+        "deliverFileOutboundChannel"
+    ],
+    "correlationParameters": [],
+    "payload": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        },
+        {
+            "name": "materialId",
+            "type": "string"
+        },
+        {
+            "name": "deliveryConfiguration",
+            "type": "string"
+        }
+    ]
+}

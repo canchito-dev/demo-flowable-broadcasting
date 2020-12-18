@@ -1,58 +1,47 @@
-<definitions xmlns="http://www.omg.org/spec/DMN/20180521/MODEL/" id="definition_d77ff763-f8dd-11ea-ad46-0242ac120007" name="Lineal Channel Configuration" namespace="http://www.flowable.org/dmn">
+<definitions xmlns="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="definition_08b5622e-4117-11eb-ab7b-0242ac1b0005" name="Lineal Channel Configuration" namespace="http://www.flowable.org/dmn">
   <decision id="linealChannelConfiguration" name="Lineal Channel Configuration">
     <description>Contains de configuration for a channel</description>
-    <decisionTable id="decisionTable_d77ff763-f8dd-11ea-ad46-0242ac120007" hitPolicy="FIRST">
+    <decisionTable id="decisionTable_42a307da-06e7-4863-a560-945c638eed42" hitPolicy="FIRST">
       <input label="Channel Name">
-        <inputExpression id="inputExpression_3" typeRef="string">
+        <inputExpression id="inputExpression_97522faf-3178-4274-afa7-31e6143a6949" typeRef="string">
           <text>channelName</text>
         </inputExpression>
         <inputValues>
-          <text>"multiLanguage","singleLanguage"</text>
+          <text>"singleLanguage","multiLanguage"</text>
         </inputValues>
       </input>
-      <output id="outputExpression_2" label="Audio Configuration" name="audioConfiguration" typeRef="string">
-        <outputValues>
-          <text>"SPA,ENG","SPA"</text>
-        </outputValues>
-      </output>
-      <output id="outputExpression_5" label="Subtitle Configuration" name="subtitleConfiguration" typeRef="string">
-        <outputValues>
-          <text>"SPA","none"</text>
-        </outputValues>
-      </output>
-      <output id="outputExpression_6" label="Delivery Configuration" name="deliveryConfiguration" typeRef="string">
-        <outputValues>
-          <text>"aspera_provider_a","signiant_provider_a","ftp_provider_a","smb_provider_a","aspera_provider_b","signiant_provider_b","ftp_provider_b","smb_provider_b"</text>
-        </outputValues>
-      </output>
+      <output id="outputExpression_e4b36a21-d971-43d8-8aa7-9c5c0c26164b" label="Audio Configuration" name="audioConfiguration" typeRef="string"></output>
+      <output id="outputExpression_ee6cb758-3b58-4068-8d2e-2fae36a1ecb9" label="Subtitle Configuration" name="subtitleConfiguration" typeRef="string"></output>
+      <output id="outputExpression_e2564af2-6319-412e-a23e-b6c572115a88" label="Delivery Configuration" name="deliveryConfiguration" typeRef="string"></output>
       <rule>
-        <inputEntry id="inputEntry_3_1">
+        <inputEntry id="inputEntry_97522faf-3178-4274-afa7-31e6143a6949_1">
           <text><![CDATA[== "singleLanguage"]]></text>
         </inputEntry>
-        <outputEntry id="outputEntry_2_1">
+        <outputEntry id="outputEntry_e4b36a21-d971-43d8-8aa7-9c5c0c26164b_1">
           <text><![CDATA["SPA"]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_5_1">
+        <outputEntry id="outputEntry_ee6cb758-3b58-4068-8d2e-2fae36a1ecb9_1">
           <text><![CDATA["none"]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_6_1">
+        <outputEntry id="outputEntry_e2564af2-6319-412e-a23e-b6c572115a88_1">
           <text><![CDATA["signiant_provider_a"]]></text>
         </outputEntry>
       </rule>
       <rule>
-        <inputEntry id="inputEntry_3_2">
+        <inputEntry id="inputEntry_97522faf-3178-4274-afa7-31e6143a6949_2">
           <text><![CDATA[== "multiLanguage"]]></text>
         </inputEntry>
-        <outputEntry id="outputEntry_2_2">
+        <outputEntry id="outputEntry_e4b36a21-d971-43d8-8aa7-9c5c0c26164b_2">
           <text><![CDATA["SPA,ENG"]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_5_2">
+        <outputEntry id="outputEntry_ee6cb758-3b58-4068-8d2e-2fae36a1ecb9_2">
           <text><![CDATA["SPA"]]></text>
         </outputEntry>
-        <outputEntry id="outputEntry_6_2">
+        <outputEntry id="outputEntry_e2564af2-6319-412e-a23e-b6c572115a88_2">
           <text><![CDATA["aspera_provider_b"]]></text>
         </outputEntry>
       </rule>
     </decisionTable>
   </decision>
+  <dmndi:DMNDI></dmndi:DMNDI>
 </definitions>

@@ -1,0 +1,8 @@
+{
+    "key": "restoreSubtitleFileFromMamOutboundChannel",
+    "name": "Restore Subtitle File From Mam Outbound Channel",
+    "channelType": "outbound",
+    "type": "kafka",
+    "serializerType": "json",
+    "topic": "mam-channel"
+}

@@ -1,0 +1,13 @@
+{
+    "key": "subtitleFileRestoredFromMamInboundChannel",
+    "name": "Subtitle File Restored From Mam Inbound Channel",
+    "channelType": "inbound",
+    "type": "kafka",
+    "deserializerType": "json",
+    "channelEventKeyDetection": {
+        "fixedValue": "subtitleFileRestoredFromMamInboundEvent"
+    },
+    "topics": [
+        "flowable-channel"
+    ]
+}

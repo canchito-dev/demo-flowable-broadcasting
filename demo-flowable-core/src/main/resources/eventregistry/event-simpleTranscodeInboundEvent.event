@@ -1,0 +1,19 @@
+{
+    "key": "simpleTranscodeInboundEvent",
+    "name": "Simple Transcode Inbound Event",
+    "inboundChannelKeys": [
+        "simpleTranscodeInboundChannel"
+    ],
+    "outboundChannelKeys": [],
+    "correlationParameters": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        }
+    ],
+    "payload": []
+}

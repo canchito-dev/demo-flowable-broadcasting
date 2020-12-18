@@ -1,0 +1,19 @@
+{
+    "key": "audioFileRestoredFromMamInboundEvent",
+    "name": "Audio File Restored From Mam Inbound Event",
+    "inboundChannelKeys": [
+        "audioFileRestoredFromMamInboundChannel"
+    ],
+    "outboundChannelKeys": [],
+    "correlationParameters": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        }
+    ],
+    "payload": []
+}

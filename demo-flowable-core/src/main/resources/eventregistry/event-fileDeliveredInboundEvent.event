@@ -1,0 +1,19 @@
+{
+    "key": "fileDeliveredInboundEvent",
+    "name": "File Delivered Inbound Event",
+    "inboundChannelKeys": [
+        "fileDeliveredInboundChannel"
+    ],
+    "outboundChannelKeys": [],
+    "correlationParameters": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        }
+    ],
+    "payload": []
+}

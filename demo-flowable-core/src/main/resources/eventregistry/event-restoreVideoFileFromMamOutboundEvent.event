@@ -1,0 +1,23 @@
+{
+    "key": "restoreVideoFileFromMamOutboundEvent",
+    "name": "Restore Video File From Mam Outbound Event",
+    "inboundChannelKeys": [],
+    "outboundChannelKeys": [
+        "restoreVideoFileFromMamOutboundChannel"
+    ],
+    "correlationParameters": [],
+    "payload": [
+        {
+            "name": "operationId",
+            "type": "string"
+        },
+        {
+            "name": "executionId",
+            "type": "string"
+        },
+        {
+            "name": "materialId",
+            "type": "string"
+        }
+    ]
+}

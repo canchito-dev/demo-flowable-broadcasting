@@ -1,0 +1,13 @@
+{
+    "key": "videoFileRestoredFromMamInboundChannel",
+    "name": "Video File Restored From Mam Inbound Channel",
+    "channelType": "inbound",
+    "type": "kafka",
+    "deserializerType": "json",
+    "channelEventKeyDetection": {
+        "fixedValue": "videoFileRestoredFromMamInboundEvent"
+    },
+    "topics": [
+        "flowable-channel"
+    ]
+}

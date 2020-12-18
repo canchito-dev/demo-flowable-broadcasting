@@ -1,0 +1,8 @@
+{
+    "key": "deliverFileOutboundChannel",
+    "name": "Deliver File Outbound Channel",
+    "channelType": "outbound",
+    "type": "kafka",
+    "serializerType": "json",
+    "topic": "storage-channel"
+}

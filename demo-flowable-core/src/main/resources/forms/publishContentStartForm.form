@@ -1,0 +1,67 @@
+{
+   "name":"Publish Content Start Form",
+   "key":"publishContentStartForm",
+   "version":0,
+   "fields":[
+      {
+         "fieldType":"FormField",
+         "id":"operationId",
+         "name":"Operation Id:",
+         "type":"text",
+         "value":null,
+         "required":true,
+         "readOnly":false,
+         "overrideId":true,
+         "placeholder":null,
+         "layout":null
+      },
+      {
+         "fieldType":"FormField",
+         "id":"materialId",
+         "name":"Material Id:",
+         "type":"text",
+         "value":null,
+         "required":true,
+         "readOnly":false,
+         "overrideId":true,
+         "placeholder":null,
+         "layout":null
+      },
+      {
+         "fieldType":"OptionFormField",
+         "id":"channelName",
+         "name":"For which channel?",
+         "type":"dropdown",
+         "value":"Please choose one...",
+         "required":true,
+         "readOnly":false,
+         "overrideId":true,
+         "placeholder":null,
+         "layout":null,
+         "optionType":null,
+         "hasEmptyValue":true,
+         "options":[
+            {
+               "id":null,
+               "name":"Please choose one..."
+            },
+            {
+               "id":null,
+               "name":"singleLanguage"
+            },
+            {
+               "id":null,
+               "name":"multiLanguage"
+            },
+            {
+               "id":null,
+               "name":"vod"
+            }
+         ],
+         "optionsExpression":null
+      }
+   ],
+   "outcomes":[
+
+   ]
+}
