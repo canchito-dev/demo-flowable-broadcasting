@@ -7,13 +7,14 @@ With the help of a workflow manager, television channels, video on-demand (VOD) 
 In this example, the Saga design pattern was followed, and where **_Flowable_** orchestrates everything. It has the responsibility of telling each participant (micro service), what to do and when. At the center, **_Kafka_** is used as a message bus.
 
 The following sample code, two workflow are created:
-- Material ingestion: A CMMN case for ingesting new digital content into a Media Asset Management (MAM).
-- Publish content: A BPM process for delivering digital content to lineal- and video on-demand- service providers.
+- _Material ingestion_: A CMMN case for ingesting new digital content into a Media Asset Management (MAM).
+- _Publish content_: A BPM process for delivering digital content to lineal- and video on-demand- service providers.
+
+The full article can be found under [mimacom](https://blog-es.mimacom.com)'s blog. Click [here](https://blog-es.mimacom.com/process-automation-with-flowable-in-broadcasting-industry-part-1/) to check the full series.
 
 ## What you’ll need
 
-- [Docker](https://www.docker.com/get-started), as you will need to start [Kafka](http://kafka.apache.org/) and   
-  [Flowable-UI](https://flowable.com/open-source/docs/bpmn/ch14-Applications/)
+- [Docker](https://www.docker.com/get-started), as you will need to start [Kafka](http://kafka.apache.org/) and [Flowable-UI](https://flowable.com/open-source/docs/bpmn/ch14-Applications/)
 - A favorite IDE. In this post, we use [Intellij Community](https://www.jetbrains.com/idea/download/index.html)
 - [JDK 11](http://www.oracle.com/technetwork/java/javase/downloads/index.html) or later. It can be made to work with JDK8, but it will need configuration tweaks. Please check the Spring Boot documentation
 
@@ -21,22 +22,22 @@ The following sample code, two workflow are created:
 1. Clone the project and import it into your favorite IDE.
 2. Make sure [Docker](https://www.docker.com/) is running.
 3. Open a Terminal window and execute the following commands:  
-   ´´´  
+   ```cmd
    $ cd docker  
    $ docker-compose up -d  
-   ´´´  
+   ```  
    The above command will start a PostgreSQL database, a Mailhog for simulating a mail server, Kafka's Zookeeper and Broker, and finally, Flowable's UI.
 4. Next, execute the following commands:  
-   ´´´  
+   ```cmd
    $ cd ../demo-flowable-core  
    $ mvn spring-boot:run -Dspring-boot.run.profiles=postgresql  
-   ´´´  
+   ```  
    The above command will start a custom Spring Boot application that implements Flowable. During the startup, all the required workflows will be automatically deployed.
 5. Now, start the service that simulates the rest of the micro services, by executing the following commands:  
-   ´´´  
+   ```cmd
    $ cd ../demo-kafka  
    $ mvn spring-boot:run  
-   ´´´
+   ```
 6. That's it. Now you can start a new case from [Flowable-UI](http://localhost:8091/flowable-ui). Just go to [http://localhost:8091/flowable-ui](http://localhost:8091/flowable-ui) and use the following credentials:
    - User: admin
    - Password: test
